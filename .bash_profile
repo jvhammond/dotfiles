@@ -1,3 +1,23 @@
+function git_branch {
+  # Shows the current branch if in a git repository
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \(\1\)/';
+}
+
+function rand() {
+  printf $((  $1 *  RANDOM  / 32767   ))
+}
+function rand_element () {
+  local -a th=("$@")
+  unset th[0]
+  printf $'%s\n' "${th[$(($(rand "${#th[*]}")+1))]}"
+}
+
+function containsElement () {
+  local e match="$1"
+  shift
+  for e; do [[ "$e" == "$match" ]] && return 0; done
+  return 1
+}
 
 #PROMPT STUFF
 GREEN=$(tput setaf 2);
@@ -11,27 +31,6 @@ EMOJI_SUMMER="$(rand_element 🐿 ☀️ 😎)"
 EMOJI_SPRING="$(rand_element 🐿 🌻 🐰)"
 EMOJI_FALL="$(rand_element 🐿 🍂 🍁)"
 EMOJI_RANDOM="$(rand_element 🐿 🐹 🍔)"
-
-function git_branch {
-  # Shows the current branch if in a git repository
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \(\1\)/';
-}
-
-rand() {
-  printf $((  $1 *  RANDOM  / 32767   ))
-}
-rand_element () {
-  local -a th=("$@")
-  unset th[0]
-  printf $'%s\n' "${th[$(($(rand "${#th[*]}")+1))]}"
-}
-
-containsElement () {
-  local e match="$1"
-  shift
-  for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
-}
 
 WINTER_MONTHS=("Dec" "Jan" "Feb")
 SPRING_MONTHS=("Mar" "Apr" "May")
@@ -63,7 +62,12 @@ fi
 
 # PATH ALTERATIONS
 ## Node
-PATH="/usr/local/bin:$PATH:./node_modules/.bin";
+#PATH=./node_modules/.bin:$PATH
+
+export PATH=./node_modules/.bin:$PATH
+
+export NVM_DIR="/Users/jefhammond/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 killport() { lsof -i tcp:"$@" | awk 'NR!=1 {print $2}' | xargs kill -9 ;}
 alias flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
