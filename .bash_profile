@@ -47,18 +47,18 @@ echo "current month: $month"
 
 if containsElement $month "${SUMMER_MONTHS[@]}"
 then
-PS1="${BLUE}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_SUMMER}  $ ";
+PS1="${YELLOW}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_SUMMER}  $ ";
 elif containsElement $month "${FALL_MONTHS[@]}"
 then
-PS1="${BLUE}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_FALL}  $ ";
+PS1="${YELLOW}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_FALL}  $ ";
 elif containsElement $month "${WINTER_MONTHS[@]}"
 then
-PS1="${BLUE}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_WINTER}  $ ";
+PS1="${YELLOW}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_WINTER}  $ ";
 elif containsElement $month "${SPRING_MONTHS[@]}"
 then
-PS1="${BLUE}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_SPRING}  $ ";
+PS1="${YELLOW}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_SPRING}  $ ";
 else
-PS1="${BLUE}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_RANDOM}  $ ";
+PS1="${YELLOW}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_RANDOM}  $ ";
 fi
 
 # PATH ALTERATIONS
@@ -76,7 +76,3 @@ alias gf="git fetch";
 alias gpush="git push";
 alias gd="git diff";
 alias ga="git add .";
-
-
-#Default Prompt
-#PS1="${BLUE}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI}  $ ";
