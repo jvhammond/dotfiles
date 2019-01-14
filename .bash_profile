@@ -61,9 +61,8 @@ PS1="${YELLOW}\w${GREEN}\$(git_branch)${RESET}\n${EMOJI_RANDOM}  $ ";
 fi
 
 # PATH ALTERATIONS
+export PATH=~/bin:$PATH
 ## Node
-#PATH=./node_modules/.bin:$PATH
-
 export PATH=./node_modules/.bin:$PATH
 
 export NVM_DIR="/Users/jefhammond/.nvm"
